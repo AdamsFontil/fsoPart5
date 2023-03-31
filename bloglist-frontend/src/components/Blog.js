@@ -1,43 +1,44 @@
-import { useState } from "react";
+import { useState } from 'react'
 import BlogService from '../services/blogs'
 const loggedBlogUser = JSON.parse(window.localStorage.getItem('loggedBlogUser'))
 const name = loggedBlogUser.name
 
 const Blog = ({ blog, blogs, setBlogs }) => {
-  const [visible, setVisible] = useState(false);
-  const [likes, setLikes] = useState(blog.likes);
+  const [visible, setVisible] = useState(false)
+  const [likes, setLikes] = useState(blog.likes)
 
   const handleHideClick = () => {
-    setVisible(false);
-  };
-
-  const handleViewClick = () => {
-    setVisible(true);
-  };
-
- const handleLikeClick = async () => {
-  console.log('liked');
-  console.log(blog);
-  const { user, ...blogWithoutUser } = blog;
-const updatedBlog = { ...blogWithoutUser, likes: blog.likes + 1 };
-  // updatedBlog.user =
-  console.log('user',updatedBlog.user);
-  const response = await BlogService.update(blog.id, updatedBlog);
-  console.log('updated blog:', response);
-  setLikes(response.likes);
-};
-
-const handleRemoveClick = async () => {
-  const remove = window.confirm(`are you sure you want to remove ${blog.title} by ${blog.author} `)
-  if (remove) {
-    console.log('removing...')
-    const response = await BlogService.remove(blog.id)
-    console.log(response)
-    const updatedBlogs = blogs.filter((b) => b.id !== blog.id);
-      setBlogs(updatedBlogs);
+    setVisible(false)
   }
 
-}
+  const handleViewClick = () => {
+    setVisible(true)
+  }
+
+  const handleLikeClick = async () => {
+    console.log('liked')
+    console.log(blog)
+    const { user, ...blogWithoutUser } = blog
+    console.log('user', user)
+    const updatedBlog = { ...blogWithoutUser, likes: blog.likes + 1 }
+    // updatedBlog.user =
+    console.log('user',updatedBlog.user)
+    const response = await BlogService.update(blog.id, updatedBlog)
+    console.log('updated blog:', response)
+    setLikes(response.likes)
+  }
+
+  const handleRemoveClick = async () => {
+    const remove = window.confirm(`are you sure you want to remove ${blog.title} by ${blog.author} `)
+    if (remove) {
+      console.log('removing...')
+      const response = await BlogService.remove(blog.id)
+      console.log(response)
+      const updatedBlogs = blogs.filter((b) => b.id !== blog.id)
+      setBlogs(updatedBlogs)
+    }
+
+  }
 
   const blogStyle = {
     paddingTop: 10,
@@ -45,7 +46,7 @@ const handleRemoveClick = async () => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5
-  };
+  }
 
   return (
     <div style={blogStyle}>
@@ -71,7 +72,7 @@ const handleRemoveClick = async () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog

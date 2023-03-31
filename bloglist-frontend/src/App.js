@@ -34,11 +34,11 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogUser')
     setUser(null)
-      setMessage('logging out')
-      setMessageType('success')
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000);
+    setMessage('logging out')
+    setMessageType('success')
+    setTimeout(() => {
+      setMessage(null)
+    }, 3000)
 
 
   }
@@ -62,8 +62,8 @@ const App = () => {
       setMessage('logging in')
 
       setTimeout(() => {
-        setMessage(null);
-      }, 5000); // reset message after 5 seconds
+        setMessage(null)
+      }, 5000) // reset message after 5 seconds
 
       setUsername('')
       setPassword('')
@@ -71,8 +71,8 @@ const App = () => {
       setMessageType('error')
       setMessage('Wrong user name or password')
       setTimeout(() => {
-        setMessage(null);
-      }, 5000); // reset message after 5 seconds
+        setMessage(null)
+      }, 5000) // reset message after 5 seconds
     }
   }
 
@@ -84,12 +84,12 @@ const App = () => {
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
       })
-      console.log('blog objects2',blogObject)
+    console.log('blog objects2',blogObject)
     setMessageType('success')
     setMessage(`a new blog ${blogObject.title} has been created by ${blogObject.author}`)
     setTimeout(() => {
-      setMessage(null);
-    }, 5000); // reset message after 5 seconds
+      setMessage(null)
+    }, 5000) // reset message after 5 seconds
   }
 
 
@@ -99,26 +99,26 @@ const App = () => {
       <div>
         <h2>Log in to application</h2>
         <Notification message={message} type={messageType} />
-    <form onSubmit={handleLogin}>
-      <div>
+        <form onSubmit={handleLogin}>
+          <div>
         username
-          <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
+            <input
+              type="text"
+              value={username}
+              name="Username"
+              onChange={({ target }) => setUsername(target.value)}
+            />
+          </div>
+          <div>
         password
-          <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
+            <input
+              type="password"
+              value={password}
+              name="Password"
+              onChange={({ target }) => setPassword(target.value)}
+            />
+          </div>
+          <button type="submit">login</button>
         </form>
       </div>
     )
@@ -131,7 +131,7 @@ const App = () => {
       <Notification message={message} type={messageType} />
       <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
       <Togglable buttonLabel='create new blog' ref={blogFormRef}>
-      <BlogForm createBlog={addBlog}/>
+        <BlogForm createBlog={addBlog}/>
       </Togglable>
       {blogs.sort((a, b) => b.likes - a.likes).map(blog =>
         <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} />

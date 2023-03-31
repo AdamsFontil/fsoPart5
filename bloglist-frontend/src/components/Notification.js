@@ -1,3 +1,4 @@
+
 const Notification = ({ message, type }) => {
   if (message === null) {
     return null
@@ -12,12 +13,12 @@ const Notification = ({ message, type }) => {
     )
   } if (type === 'error') {
 
-  console.log('erroring')
-  return (
-    <div className='error'>
-      {message}
-    </div>
-  )
+    console.log('erroring')
+    return (
+      <div className='error'>
+        {message}
+      </div>
+    )
   }
 }
 
