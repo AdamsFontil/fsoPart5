@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.2.3",
-    "eslint": "^6.8.0",
+    "axios": "^0.24.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -16,23 +12,26 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns '/node_modules/(?!axios)/'",
     "eject": "react-scripts eject",
     "eslint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
-      "extends": ["react-app", "eslint:recommended"],
-      "parserOptions": {
-        "ecmaVersion": 2020,
-        "sourceType": "module",
-        "ecmaFeatures": {
-          "jsx": true
-        }
-      },
-      "rules": {}
-    }
-    ,
+    "extends": [
+      "react-app",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {}
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -45,5 +44,15 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:2005"
+  "proxy": "http://localhost:2005",
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "babel-jest": "^29.5.0",
+    "cypress": "^12.9.0",
+    "eslint-plugin-cypress": "^2.13.2"
+  }
 }

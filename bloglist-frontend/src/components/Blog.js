@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import BlogService from '../services/blogs'
 const loggedBlogUser = JSON.parse(window.localStorage.getItem('loggedBlogUser'))
-const name = loggedBlogUser.name
+const name = loggedBlogUser ? loggedBlogUser.name : null
 
 const Blog = ({ blog, blogs, setBlogs }) => {
   const [visible, setVisible] = useState(false)
@@ -12,6 +12,7 @@ const Blog = ({ blog, blogs, setBlogs }) => {
   }
 
   const handleViewClick = () => {
+    console.log('handleViews')
     setVisible(true)
   }
 
@@ -20,13 +21,15 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     console.log(blog)
     const { user, ...blogWithoutUser } = blog
     console.log('user', user)
-    const updatedBlog = { ...blogWithoutUser, likes: blog.likes + 1 }
+    const updatedBlog = { ...blogWithoutUser, likes: likes + 1 } //change likes: likes + 1 to likes: blog.likes + 1 to limit user ability to like to just one
     // updatedBlog.user =
     console.log('user',updatedBlog.user)
     const response = await BlogService.update(blog.id, updatedBlog)
     console.log('updated blog:', response)
     setLikes(response.likes)
+    setBlogs(blogs.map(b => b.id === response.id ? response : b))
   }
+
 
   const handleRemoveClick = async () => {
     const remove = window.confirm(`are you sure you want to remove ${blog.title} by ${blog.author} `)
@@ -49,9 +52,9 @@ const Blog = ({ blog, blogs, setBlogs }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog'>
       {visible ? (
-        <div>
+        <div className='details'>
           <div>
             {blog.title}
             <button onClick={handleHideClick}> hide</button>
@@ -59,16 +62,17 @@ const Blog = ({ blog, blogs, setBlogs }) => {
           <div>{blog.url}</div>
           <div>
             likes {likes}
-            <button onClick={handleLikeClick}>like</button>
+            <button onClick={handleLikeClick} className='likeBtn' >like</button>
           </div>
           <div>{blog.author}</div>
           <div>{blog.user && blog.user.name ? blog.user.name : name}</div>
-          <button onClick={handleRemoveClick}>remove</button>
+          {blog.user && blog.user.name === name &&
+          <button onClick={handleRemoveClick} >remove</button>}
         </div>
       ) : (
-        <div>
+        <div className='noDetails'>
           {blog.title} {blog.author}
-          <button onClick={handleViewClick}> view</button>
+          <button onClick={handleViewClick} className='viewBtn' > view</button>
         </div>
       )}
     </div>
