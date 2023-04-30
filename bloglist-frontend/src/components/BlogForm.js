@@ -17,21 +17,18 @@ const BlogForm = ({ createBlog }) => {
   }
 
   return (
-    <form onSubmit={handleBlogSubmit}>
-      <h2>create new</h2>
+    <form className=' flex text-lg gap-2 flex-col items-start' onSubmit={handleBlogSubmit}>
+      <h2 className='text-2xl'>create new</h2>
       <div>
-        title: <input id='title' name="title" value={newBlog.title} onChange={handleBlogChange} />
+        title: <input className='border-2 rounded-md' id='title' name="title" value={newBlog.title} onChange={handleBlogChange} />
       </div>
       <div>
-        author: <input id='author' name="author" value={newBlog.author} onChange={handleBlogChange} />
+        author: <input className='border-2 rounded-md'  id='author' name="author" value={newBlog.author} onChange={handleBlogChange} />
       </div>
       <div>
-        url: <input id='url' name="url" value={newBlog.url} onChange={handleBlogChange} />
+        url: <input className='border-2 rounded-md'  id='url' name="url" value={newBlog.url} onChange={handleBlogChange} />
       </div>
-      <div>
-        url: <input id='likes' name="likes" value={newBlog.likes} onChange={handleBlogChange} />
-      </div>
-      <button type="submit">Create</button>
+      <button className='text-xl bg-emerald-500 p-1 border-2 rounded-md my-2' type="submit">Create</button>
     </form>
   )
 }
