@@ -130,6 +130,10 @@ const App = () => {
     }
   }
 
+  const handleCancelSignup = () => {
+    setSignup(false)
+  }
+
   if (signup === true) {
     return (
       <div className='bg-emerald-500' style={{ height: '100vh' }} >
@@ -168,6 +172,7 @@ const App = () => {
               />
             </div>
             <button className='bg-gray-400 p-4 border-2 rounded-md' type="submit" id='signup-button'>Sign up</button>
+            <button className='bg-orange-300 p-4 border-2 rounded-md' type="submit" id='signup-button' onClick={handleCancelSignup}>Cancel</button>
           </form>
         </div>
       </div>
@@ -209,11 +214,14 @@ const App = () => {
           <Togglable buttonLabel='Dont want to sign up? Login with a sample user'>
             <div className='flex items-center flex-col'>
               <h2>These are the usernames, the password for all them is 12345</h2>
-              <p>Adams</p>
-              <p>Mikey</p>
-              <p>hellas</p>
-              <p>mluukkai</p>
-              <p>Adams1</p>
+              <div className='flex gap-3 mb-3'>
+                <p className='border-2 bg-emerald-500 rounded-md p-1'>Adams</p>
+                <p className='border-2 bg-emerald-500 rounded-md p-1'>Mikey</p>
+                <p className='border-2 bg-emerald-500 rounded-md p-1'>hellas</p>
+                <p className='border-2 bg-emerald-500 rounded-md p-1'>mluukkai</p>
+                <p className='border-2 bg-emerald-500 rounded-md p-1'>Adams1</p>
+              </div>
+
             </div>
           </Togglable>
         </div>
