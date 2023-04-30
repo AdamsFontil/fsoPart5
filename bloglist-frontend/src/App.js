@@ -204,7 +204,18 @@ const App = () => {
             </div>
             <button className='bg-gray-400 p-4 border-2 rounded-md' type="submit" id='login-button'>Login</button>
             <button className='bg-orange-300 p-4 border-2 rounded-md' type="submit" id='signup-button' onClick={handleSignUp}>Sign up</button>
+            {/* <p>Dont want to signup, <a>click here</a> to get the credentials for some sample users</p> */}
           </form>
+          <Togglable buttonLabel='Dont want to sign up? Login with a sample user'>
+            <div className='flex items-center flex-col'>
+              <h2>These are the usernames, the password for all them is 12345</h2>
+              <p>Adams</p>
+              <p>Mikey</p>
+              <p>hellas</p>
+              <p>mluukkai</p>
+              <p>Adams1</p>
+            </div>
+          </Togglable>
         </div>
       </div>
     )
