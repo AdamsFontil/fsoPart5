@@ -17,11 +17,11 @@ const Blog = ({ blog, blogs, setBlogs }) => {
   }
 
   const handleLikeClick = async () => {
-    console.log('likedy')
+    console.log('liked')
     console.log(blog)
     const { user, ...blogWithoutUser } = blog
     console.log('user', user)
-    const updatedBlog = { ...blogWithoutUser, likes: blog.likes + 1 } //change likes: likes + 1 to likes: blog.likes + 1 to limit user ability to like to just one
+    const updatedBlog = { ...blogWithoutUser, likes: likes + 1 } //change likes: likes + 1 to likes: blog.likes + 1 to limit user ability to like to just one
     // updatedBlog.user =
     console.log('user',updatedBlog.user)
     const response = await BlogService.update(blog.id, updatedBlog)
@@ -29,9 +29,6 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     setLikes(response.likes)
     setBlogs(blogs.map(b => b.id === response.id ? response : b))
   }
-
-
-
 
 
   const handleRemoveClick = async () => {
@@ -45,35 +42,36 @@ const Blog = ({ blog, blogs, setBlogs }) => {
     }
 
   }
-  return (
-    <div className='blog m-2'>
-      {visible ? (
-        <div className='details flex justify-between p-2'>
-          <div>
-            <div className='flex justify-between'>
-              Title: {blog.title}
-            </div>
-            <div>Url: {blog.url}</div>
-            <div className='flex justify-between'>
-            Likes: {likes}
 
-            </div>
-            <div>Author: {blog.author}</div>
-            <div >Created by: {blog.user && blog.user.name ? blog.user.name : name}</div>
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: 'solid',
+    borderWidth: 1,
+    marginBottom: 5
+  }
+
+  return (
+    <div style={blogStyle} className='blog'>
+      {visible ? (
+        <div className='details'>
+          <div>
+            {blog.title}
+            <button onClick={handleHideClick}> hide</button>
           </div>
-          <div className='flex flex-col'>
-            <button className=' bg-gray-400 border-2 rounded-md p-2' onClick={handleHideClick}> hide</button>
-            <button  onClick={handleLikeClick} className='likeBtn bg-emerald-500 border-2 rounded-md p-2' >like</button>
-            {blog.user && blog.user.name === name &&
-          <button className='bg-orange-400 border-2 rounded-md p-2' onClick={handleRemoveClick} >remove</button>}
+          <div>{blog.url}</div>
+          <div>
+            likes {likes}
+            <button onClick={handleLikeClick} className='likeBtn' >like</button>
           </div>
+          <div>{blog.author}</div>
+          <div>{blog.user && blog.user.name ? blog.user.name : name}</div>
+          {blog.user && blog.user.name === name &&
+          <button onClick={handleRemoveClick} >remove</button>}
         </div>
       ) : (
-        <div className='noDetails flex justify-between p-2'>
-          <div className='flex gap-4'>
-            <div>{blog.title}</div>
-            <div className='bg-emerald-500'>Author: {blog.author}</div>
-          </div>.
+        <div className='noDetails'>
+          {blog.title} {blog.author}
           <button onClick={handleViewClick} className='viewBtn' > view</button>
         </div>
       )}
